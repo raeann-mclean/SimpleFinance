@@ -12,7 +12,7 @@
 // To use this configuration file, make sure to set the correct
 // database connection parameters below.  
 
-include_once (ROOT_PATH.'/php/path.php');
+include_once __DIR__ . '/path.php';
 
 /* Important - Comment Error Reporting Section out before going live!!!  */
 error_reporting(E_ALL);
