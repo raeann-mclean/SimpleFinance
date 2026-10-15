@@ -3,7 +3,7 @@
  * create account Page
  *
  * @author    Joshua Connor <connorj4@southernct.edu>
- * @copyright 2026 
+ * @copyright 
  * @date      2026-02-24
  * @version   1.0
  */
