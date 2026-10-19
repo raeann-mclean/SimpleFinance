@@ -16,6 +16,33 @@ XAMPP should be installed locally in order to run this program.
 
 These files must be hosted within a system that supports lamp stacks, preferably install this into a XAMPP and run locally. This project is not built to scale for a production based website, it intention is to be used as a teaching tool.
 
+## PROJECT STRUCTURE
+
+```
+SimpleFinance/
+├── index.php          Login page (the homepage, must stay at the top level)
+├── pages/             Other public pages: create account, forgot password, login failed
+├── dashboards/        Where users land after logging in: admin/, user/, guest/
+├── templates/         Shared head, navbar and footer, plus blank_page.php to copy for new pages
+├── php/               Code that runs behind the scenes: form handlers, login/session checks,
+│                      database connection (config.php, path.php) and start.php
+├── assets/            css/, js/ and img/
+├── mockups/           Plain HTML design mockups (not part of the running app)
+└── src/db/            schema.sql and seeds.sql
+```
+
+A page and the code that handles its form live in different folders: for example, `pages/create_account.php` shows the form and `php/create_account_submit.php` saves the new account.
+
+Use the constants from `php/path.php` for links and includes instead of relative paths like `./` or `../`:
+
+| Constant | Use it for | Example |
+|---|---|---|
+| `BASE_URL` | Links to pages | `<?php echo BASE_URL; ?>/pages/create_account.php` |
+| `SRC_PATH` | Form actions / links to `php/` | `<?php echo SRC_PATH; ?>/logout.php` |
+| `ASSET_URL` | CSS, JS, images | `<?php echo ASSET_URL; ?>/img/logo.svg` |
+| `TEMPLATE_PATH` | Including the head/header/footer | `include_once TEMPLATE_PATH . "/header.php";` |
+| `ROOT_PATH` / `ROOT_SRC_PATH` | Including other PHP files | `include_once ROOT_SRC_PATH . "/config.php";` |
+
 ## SETUP (do this once)
 
 You need [XAMPP](https://www.apachefriends.org/index.html) installed (default location `C:\xampp`) and Git.

@@ -12,9 +12,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
 
   /* Quick Paths */
-  /* note the 2 after __FILE__, because it's 2 directories deep */
-  include_once (realpath(dirname(__FILE__, 2).'/php/session.php'));
-  include_once (realpath(dirname(__FILE__, 2).'/php/path.php'));
+  /* note the 2 after __FILE__, because it's 3 directories deep */
+  include_once (realpath(dirname(__FILE__, 3).'/php/session.php'));
+  include_once (realpath(dirname(__FILE__, 3).'/php/path.php'));
   // Session will be included in header.php
   
   /* Check Role */
@@ -27,11 +27,11 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
 <!doctype html>
 <html lang="en">
   <head>
-  <?php include_once (ROOT_PATH . '/include/head.php'); ?>
+  <?php include_once (TEMPLATE_PATH . '/head.php'); ?>
   </head>
   <body class="<?php echo $page_name; ?>">
 
-  <?php include_once (ROOT_PATH . '/include/header.php'); ?>
+  <?php include_once (TEMPLATE_PATH . '/header.php'); ?>
     <main role="main" class="container">
 
     <div class="container text-center">
@@ -103,6 +103,6 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
 </div>  
        
     </main>
-    <?php include_once (ROOT_PATH . '/include/footer.php'); ?>
+    <?php include_once (TEMPLATE_PATH . '/footer.php'); ?>
   </body>
 </html>
