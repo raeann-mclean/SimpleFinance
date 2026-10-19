@@ -9,6 +9,12 @@
 
   session_start();
   
+  // Not logged in, send to the login page
+  if (!isset($_SESSION['login_user'])) {
+    header("location: " . BASE_URL . "/index.php");
+    exit();
+  }
+
   $user_check = $_SESSION['login_user'];
   // Check user and get roll session from database
 
@@ -43,13 +49,13 @@
   // or if there is no session
   // You can add more session checks as needed
    if(!isset($user_id)){
-    header("location: " . BASE_URL . "failed.html");
+    header("location: " . BASE_URL . "/failed.html"); exit();
   }
   if(!isset($first_name)){
-    header("location: " . BASE_URL . "failed.html");
+    header("location: " . BASE_URL . "/failed.html"); exit();
   }
   if(!isset($user_type)){
-    header("location: " . BASE_URL . "failed.html");
+    header("location: " . BASE_URL . "/failed.html"); exit();
   }
 
   $select_user->close();

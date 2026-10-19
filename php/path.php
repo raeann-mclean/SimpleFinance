@@ -3,7 +3,7 @@
 // DATABASE CONNECTION
 //======================================================================
 
-$directory = "/SimpleFinance"; // Change to your project folder
+$directory = "/csc235group/SimpleFinance-1"; // Change to your project folder
 
 /* Define base url path */
 DEFINE("BASE_URL", $directory);

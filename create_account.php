@@ -9,7 +9,10 @@
  */
 
   /* Start The Session */
-  session_start(); 
+  session_start();
+
+  /* Page Name */
+  $page_name = "create_account";
 
 ?>
 <!doctype html>
