@@ -10,7 +10,7 @@
 // 
 if (!isset($_SESSION)) {
     // Only include session if not already started
-    include_once (realpath(dirname(__FILE__).'/path.php'));
+    include_once (realpath(dirname(__FILE__, 2).'/php/path.php'));
     // Include session file
     include_once (ROOT_PATH . '/php/session.php');
 }
@@ -24,7 +24,7 @@ if (!isset($_SESSION)) {
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="../">   
+    <a class="navbar-brand" href="<?php echo BASE_URL; ?>/">   
     <i class="bi bi-claude"></i>  Basic Login</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -35,28 +35,28 @@ if (!isset($_SESSION)) {
           /* Show Home link only when user is NOT logged in */
           if (!isset($_SESSION['user_name'])) {
             echo '<li class="nav-item">';
-            echo '<a class="nav-link active" aria-current="page" href="../">Home</a>';
+            echo '<a class="nav-link active" aria-current="page" href="' . BASE_URL . '/">Home</a>';
             echo '</li>';
           }
         ?>
         <?php
           /* User Information */
           if (isset($_SESSION['user_name']) && $_SESSION['user_role'] == 1) { // Only display when user is logged in
-            echo '<li class="nav-item"><a class="nav-link" href="index.php">Admin Dashboard</a></li>';
+            echo '<li class="nav-item"><a class="nav-link" href="' . BASE_URL . '/dashboards/admin/">Admin Dashboard</a></li>';
             echo '<li class="nav-item"><a class="nav-link" href="#">New Page</a></li>';
           }
         ?>
         <?php
           /* User Information */
           if (isset($_SESSION['user_name']) && $_SESSION['user_role'] == 2) { // Only display when user is logged in
-            echo '<li class="nav-item"><a class="nav-link" href="index.php">User Dashboard</a></li>';
+            echo '<li class="nav-item"><a class="nav-link" href="' . BASE_URL . '/dashboards/user/">User Dashboard</a></li>';
             echo '<li class="nav-item"><a class="nav-link" href="#">New Page</a></li>';
           }
         ?>
         <?php
           /* User Information */
           if (isset($_SESSION['user_name']) && $_SESSION['user_role'] == 3) { // Only display when user is logged in
-            echo '<li class="nav-item"><a class="nav-link" href="index.php">Guest Dashboard</a></li>';
+            echo '<li class="nav-item"><a class="nav-link" href="' . BASE_URL . '/dashboards/guest/">Guest Dashboard</a></li>';
             echo '<li class="nav-item"><a class="nav-link" href="#">New Page</a></li>';
           }
         ?>
@@ -66,7 +66,7 @@ if (!isset($_SESSION)) {
             /* User Information */
             if (isset($_SESSION['user_first']) && isset($_SESSION['user_type'])) {
                 echo 'Welcome ' . $_SESSION['user_first'] . ' (' . $_SESSION['user_type'] . ')';
-                echo ' | <a href="../php/logout.php">Logout</a>';
+                echo ' | <a href="' . SRC_PATH . '/logout.php">Logout</a>';
             } else {
                 echo 'Not Logged In';
             }

@@ -59,11 +59,11 @@ if (isset($_POST['submit'])) {
         $_SESSION['user_role'] = $user_role;
         // Redirect based on user role
         if ($_SESSION['user_role'] == 1) {
-          header("location: " . BASE_URL . "/admin");
+          header("location: " . BASE_URL . "/dashboards/admin");
         } elseif ($_SESSION['user_role'] == 2) {
-          header("location:" . BASE_URL . "/user");
+          header("location:" . BASE_URL . "/dashboards/user");
         } elseif ($_SESSION['user_role'] == 3) {
-          header("location:" . BASE_URL . "/guest");
+          header("location:" . BASE_URL . "/dashboards/guest");
         } else {
           $_SESSION['error'] = "Login Failed";
           

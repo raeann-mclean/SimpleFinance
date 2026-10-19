@@ -1,37 +1,58 @@
 <?php
 /**
- * Admin Index Page
+ * User Index Page
  *
  * @author    Joshua Connor <connorj4@southernct.edu>
  * @copyright 2026 
  * @date      2026-02-24
  * @version   1.0
+ * new update: 2026-06-01
  */
+error_reporting(E_ALL); // Report all errors
+ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
+
+  /* Quick Paths */
+  /* note the 2 after __FILE__, because it's 3 directories deep */
+  include_once (realpath(dirname(__FILE__, 3).'/php/session.php')); // Session will be included in header.php
+  include_once (realpath(dirname(__FILE__, 3).'/php/path.php')); // Path will be included in header.php
+  // Session will be included in header.php
+
+  /* Page Name */
+  $page_name = "user";
+
+?>
+<?php
+//======================================================================
+// USER DASHBOARD PAGE
+//======================================================================
 
 error_reporting(E_ALL);
 ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
 
   /* Quick Paths */
-  /* note the 2 after __FILE__, because it's 2 directories deep */
-  include_once (realpath(dirname(__FILE__, 2).'/php/session.php'));
-  include_once (realpath(dirname(__FILE__, 2).'/php/path.php'));
+  /* note the 2 after __FILE__, because it's 3 directories deep */
+  include_once (realpath(dirname(__FILE__, 3).'/php/session.php')); // Session will be included in header.php
+  include_once (realpath(dirname(__FILE__, 3).'/php/path.php')); // Path will be included in header.php
   // Session will be included in header.php
   
   /* Check Role */
-  include_once (ROOT_SRC_PATH .'/check_admin.php');
+  include_once (ROOT_SRC_PATH .'/check_user.php'); // Check user role and redirect if not authorized
+
+  $user_check = $_SESSION['login_user'];
+  // Check user and get roll session from database
 
   /* Page Name */
-  $page_name = "admin";
+  $page_name = "admin"; // Set page name for active link in header
 
 ?>
 <!doctype html>
 <html lang="en">
   <head>
-  <?php include_once (ROOT_PATH . '/include/head.php'); ?>
+  <?php include_once (TEMPLATE_PATH . '/head.php'); // Include head.php ?>
   </head>
   <body class="<?php echo $page_name; ?>">
 
-  <?php include_once (ROOT_PATH . '/include/header.php'); ?>
+  <?php include_once (TEMPLATE_PATH . '/header.php'); // Include header.php ?>
     <main role="main" class="container">
 
     <div class="container text-center">
@@ -41,11 +62,11 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
       <div class="mb-6">
       <h1>Welcome <?php echo $_SESSION['user_first'] ?></h1>
       <p class="lead">This is the <?php echo $_SESSION['user_type'] ?> dashboard.</p>
-      <p>Only users with the <?php echo $_SESSION['user_type'] ?> role can access this page.</p>
+      <p>Only users with the  role can access this page.</p>
       </div>
       <hr class="mb-4">
       <section class="mb-4">
-      <h2>All System Users</h2>
+      <h2>User Information</h2>
       <table class="table">
   <thead>
     <tr>
@@ -73,7 +94,8 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
         INNER JOIN Contacts c ON u.contact_id = c.contact_id
         INNER JOIN Credentials cr ON u.user_id = cr.user_id
         INNER JOIN Roles r ON u.role_id = r.role_id
-        ORDER BY u.user_id ASC");
+        WHERE cr.username = '$user_check'
+        ");
 
       if ($result->num_rows > 0) {
         // output data of each row
@@ -103,6 +125,7 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
 </div>  
        
     </main>
-    <?php include_once (ROOT_PATH . '/include/footer.php'); ?>
+    <?php include_once (TEMPLATE_PATH . '/footer.php'); ?>
   </body>
 </html>
+

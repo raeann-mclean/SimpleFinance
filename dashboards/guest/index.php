@@ -8,8 +8,8 @@
  * @version   1.0
  */
   /* Quick Paths */
-  /* note the 2 after __FILE__, because it's 2 directories deep */
-  include_once (realpath(dirname(__FILE__, 2).'/php/session.php'));
+  /* note the 2 after __FILE__, because it's 3 directories deep */
+  include_once (realpath(dirname(__FILE__, 3).'/php/session.php'));
   /* Check Role */
   include_once (ROOT_SRC_PATH .'/check_guest.php');
 
@@ -20,11 +20,11 @@
 <!doctype html>
 <html lang="en">
   <head>
-  <?php include_once (ROOT_PATH . '/include/head.php'); ?>
+  <?php include_once (TEMPLATE_PATH . '/head.php'); ?>
   </head>
   <body class="<?php echo $page_name; ?>">
 
-  <?php include_once (ROOT_PATH . '/include/header.php'); ?>
+  <?php include_once (TEMPLATE_PATH . '/header.php'); ?>
     <main role="main" class="container">
 
     <div class="container text-center">
@@ -38,6 +38,6 @@
 </div>  
        
     </main>
-    <?php include_once (ROOT_PATH . '/include/footer.php'); ?>
+    <?php include_once (TEMPLATE_PATH . '/footer.php'); ?>
   </body>
 </html>
