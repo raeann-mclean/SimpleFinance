@@ -8,6 +8,9 @@
  * @version   1.0
  */
 
+  /* Quick Paths */
+  include_once (realpath(dirname(__FILE__, 2).'/php/path.php'));
+
   /* Start The Session */
   session_start();
 
@@ -18,15 +21,15 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <?php include_once "./include/head.php"; ?>
+    <?php include_once TEMPLATE_PATH . "/head.php"; ?>
   </head>
   <body>
-    <?php include_once "./include/header.php"; ?>
+    <?php include_once TEMPLATE_PATH . "/header.php"; ?>
     <main role="main" class="container">
       <div class="row justify-content-sm-center">
         <div class="col-sm-4">
           <h1>Create Account</h1>
-          <form action="./php/create_account.php" method="post">
+          <form action="<?php echo SRC_PATH; ?>/create_account_submit.php" method="post">
             <div class="input-group mb-3">
               <input type="text" class="form-control" id="first_name" placeholder="Enter First Name" name="first_name" required>
             </div>
@@ -72,12 +75,12 @@
           <hr />
           <p class="text-center">
               <small>
-                <a href="./index.php">Login</a> | <a href="./forgot_pass.php">Forgot Password</a>
+                <a href="<?php echo BASE_URL; ?>/">Login</a> | <a href="<?php echo BASE_URL; ?>/pages/forgot_pass.php">Forgot Password</a>
               </small>
           </p>
         </div>
       </div>
     </main>
-    <?php include_once "./include/footer.php"; ?>
+    <?php include_once TEMPLATE_PATH . "/footer.php"; ?>
   </body>
 </html>

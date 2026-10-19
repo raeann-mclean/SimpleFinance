@@ -8,6 +8,9 @@
  * @version   1.0
  */
 
+  /* Quick Paths */
+  include_once (realpath(dirname(__FILE__, 2).'/php/path.php'));
+
   /* Start The Session */
   session_start(); 
 
@@ -15,10 +18,10 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <?php include_once "./include/head.php"; ?>
+    <?php include_once TEMPLATE_PATH . "/head.php"; ?>
   </head>
   <body>
-    <?php include_once "./include/header.php"; ?>
+    <?php include_once TEMPLATE_PATH . "/header.php"; ?>
     <main role="main" class="container">
       <div class="row justify-content-sm-center">
         <div class="col-sm-4">
@@ -39,12 +42,12 @@
           <hr />
           <p class="text-center">
             <small>
-              <a href="./create_account.php">Create An Account</a> | <a href="./">Login</a>
+              <a href="<?php echo BASE_URL; ?>/pages/create_account.php">Create An Account</a> | <a href="<?php echo BASE_URL; ?>/">Login</a>
             </small>
           </p>
         </div>
       </div>
     </main>
-    <?php include_once "./include/footer.php"; ?>
+    <?php include_once TEMPLATE_PATH . "/footer.php"; ?>
   </body>
 </html>

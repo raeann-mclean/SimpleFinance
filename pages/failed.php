@@ -1,3 +1,4 @@
+<?php include_once (realpath(dirname(__FILE__, 2).'/php/path.php')); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,10 +41,9 @@
   <body>
     <div class="parent-container">
       <div class="container">
-        <h1>Welcome to the CSC540 Project Page</h1>
+        <h1>Login Failed. Redirecting to Login Page...</h1>
       </div>
     </div>
 
-    <script src="script.js"></script>
   </body>
 </html>
