@@ -19,7 +19,7 @@ $dashboard_link = isset($_SESSION['user_type'])
 <header class="py-5">
   <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary border-bottom border-primary-subtle nav-pills bs-success">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<?php echo $dashboard_link; ?>">Simple Finance</a>
+        <a class="navbar-brand px-3 py-2 rounded text-white d-flex align-items-center" style="background-color: #050359;" href="<?php echo $dashboard_link; ?>"><img src="<?php echo ASSET_URL; ?>/img/SimpleFinanceLogo.png" alt="Simple Finance" height="30" class="me-2">Simple Finance</a>
         <button
           class="navbar-toggler"
           type="button"
