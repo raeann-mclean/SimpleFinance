@@ -23,7 +23,8 @@ include_once (realpath(dirname(__FILE__, 2).'/php/path.php'));
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Website to show authentication">
-<meta name="author" content="CSC 235s Team Project">
+<meta name="author" content="CSC235 Team Project / Logo by James Montgomery">
+<!-- SimpleFinanceLogo.png created by James Montgomery -->
 <link rel="icon" href="<?php echo BASE_URL; ?>/favicon.ico">
 
 <title>Basic Login Application</title>
