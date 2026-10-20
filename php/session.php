@@ -24,7 +24,7 @@
     "SELECT 
         u.user_id,
         u.role_id,
-        c.first_name,
+        c.first_name,/*may need to modify based off what we need from user*/
         cr.username,
         r.role_type
     FROM Users u
@@ -49,13 +49,16 @@
   // or if there is no session
   // You can add more session checks as needed
    if(!isset($user_id)){
-    header("location: " . BASE_URL . "failed.html");
+    header("location: " . BASE_URL . "/pages/failed.php");
+    exit();
   }
   if(!isset($first_name)){
-    header("location: " . BASE_URL . "failed.html");
+    header("location: " . BASE_URL . "/pages/failed.php");
+    exit();
   }
   if(!isset($user_type)){
-    header("location: " . BASE_URL . "failed.html");
+    header("location: " . BASE_URL . "/pages/failed.php");
+    exit();
   }
 
   $select_user->close();

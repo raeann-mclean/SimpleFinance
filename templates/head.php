@@ -23,7 +23,7 @@ include_once (realpath(dirname(__FILE__, 2).'/php/path.php'));
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Website to show authentication">
-<meta name="author" content="CSC 540 Team Project">
+<meta name="author" content="CSC 235s Team Project">
 <link rel="icon" href="<?php echo BASE_URL; ?>/favicon.ico">
 
 <title>Basic Login Application</title>
@@ -40,5 +40,5 @@ include_once (realpath(dirname(__FILE__, 2).'/php/path.php'));
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
 <?php /* Application Custom Styles */ ?>
-<link href="./css/style.css" rel="stylesheet" type="text/css" />
+<link href="<?php echo BASE_URL; ?>/css/style.css" rel="stylesheet" type="text/css" />
 

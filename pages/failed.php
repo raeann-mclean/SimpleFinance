@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta http-equiv="refresh" content="2;url=http://localhost/csc540_login/index.php">
+    <meta http-equiv="refresh" content="2;url=<?php echo BASE_URL; ?>/index.php">
     <title>Starter Page CSC 540</title>
     <style>
       body {

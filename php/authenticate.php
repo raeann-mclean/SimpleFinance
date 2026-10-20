@@ -71,9 +71,9 @@ if (isset($_POST['submit'])) {
       }
   } else {
     // Invalid login
-    $_SESSION['message'] = "Username or Password did not match!";
-    // Redirect to logout
-    header("location: " . SRC_PATH . "/logout.php"); 
+    session_start();
+    $_SESSION['error'] = "Incorrect username or password.";
+    header("location: " . BASE_URL . "/index.php");
     exit();
   }
   // close the mysql connection
