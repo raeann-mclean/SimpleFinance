@@ -23,13 +23,13 @@
     <?php include_once TEMPLATE_PATH . "/header.php"; ?>
 
     <?php $active_page = 'dashboard'; ?>
-    <div class="d-flex vh-100 m-0" style="margin-top: 56px;">
+    <div class="d-flex vh-100 m-0">
       <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
 
       <!-- main -->
       <main role="main" class="flex-grow-1 p-4">
         <h1>Simple Finance Dashboard</h1>
-        <p>Welcome to Simple Money</p>
+        <p>Welcome to Simple Finance</p>
 
         <!-- Budget Overview -->
         <div class="row g-4 mt-2">

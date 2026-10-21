@@ -23,8 +23,10 @@
   <?php include_once (TEMPLATE_PATH . '/head.php'); ?>
   </head>
   <body class="<?php echo $page_name; ?>">
+  
 
   <?php include_once (TEMPLATE_PATH . '/header.php'); ?>
+  <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
     <main role="main" class="container">
 
     <div class="container text-center">
