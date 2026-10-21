@@ -16,52 +16,48 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- One head file for all pages -->
+    <!--head file for all pages -->
     <?php include_once TEMPLATE_PATH . "/head.php"; ?>
   </head>
-  <body>
+  <body class="h-100">
     <?php include_once TEMPLATE_PATH . "/header.php"; ?>
 
-    <div class="d-flex" style="margin-top: 56px; min-height);">
-      <!-- ssssidebar -->
-      <nav class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white" style="width: 250px; background-color: #050359;">
-        <a href="<?php echo BASE_URL; ?>/mockups/dashboard.php" class="d-flex align-items-center mb-3 text-white text-decoration-none border-bottom pb-3">
-          <img src="<?php echo ASSET_URL; ?>/img/SimpleFinanceLogo.png" alt="Simple Finance" height="30" class="me-2">
-          <span class="fs-5 fw-semibold">Simple Finance</span>
-        </a>
-        <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-            <a href="<?php echo BASE_URL; ?>/mockups/dashboard.php" class="nav-link text-white active" style="background-color: #1a0f8a;">
-              <i class="bi bi-speedometer2 me-2"></i>Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white">
-              <i class="bi bi-wallet2 me-2"></i>Accounts
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white">
-              <i class="bi bi-arrow-left-right me-2"></i>Transactions
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white">
-              <i class="bi bi-graph-up me-2"></i>Reports
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-white">
-              <i class="bi bi-gear me-2"></i>Settings
-            </a>
-          </li>
-        </ul>
-      </nav>
+    <?php $active_page = 'dashboard'; ?>
+    <div class="d-flex vh-100 m-0" style="margin-top: 56px;">
+      <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
 
-      <!-- Main Content -->
+      <!-- main -->
       <main role="main" class="flex-grow-1 p-4">
         <h1>Simple Finance Dashboard</h1>
         <p>Welcome to Simple Money</p>
+
+        <!-- Budget Overview -->
+        <div class="row g-4 mt-2">
+          <div class="col-md-4">
+            <div class="card border-success">
+              <div class="card-body text-center">
+                <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-wallet2 me-1"></i>Total Balance</h6>
+                <p class="card-text fs-3 fw-bold text-success">$12,310.00</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-danger">
+              <div class="card-body text-center">
+                <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-cart me-1"></i>Spent This Month</h6>
+                <p class="card-text fs-3 fw-bold text-danger">$725.00</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-primary">
+              <div class="card-body text-center">
+                <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-cash-stack me-1"></i>Left to Spend</h6>
+                <p class="card-text fs-3 fw-bold text-primary">$2,275.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </div>
 
