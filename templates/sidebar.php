@@ -10,10 +10,6 @@ if (!isset($active_page)) {
 }
 ?>
 <nav class="sidebar d-flex flex-column flex-shrink-0 p-3 text-white" style="width: 250px; background-color: #050359;">
-  <a href="<?php echo BASE_URL; ?>/mockups/dashboard.php" class="d-flex align-items-center mb-3 text-white text-decoration-none border-bottom pb-3">
-    <img src="<?php echo ASSET_URL; ?>/img/SimpleFinanceLogo.png" alt="Simple Finance" height="30" class="me-2">
-    <span class="fs-5 fw-semibold">Simple Finance</span>
-  </a>
   <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item">
       <a href="<?php echo BASE_URL; ?>/mockups/dashboard.php" class="nav-link text-white <?php echo ($active_page === 'dashboard') ? 'active' : ''; ?>" <?php if ($active_page === 'dashboard') echo 'style="background-color: #1a0f8a;"'; ?>>

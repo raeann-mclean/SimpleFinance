@@ -17,15 +17,16 @@ if (!isset($_SESSION)) {
 ?>
 <?php
 // Header Section
+include_once (TEMPLATE_PATH . '/head.php');
 ?>
-<header class="mb-5">
+<header>
 <?php
 // navigation bar
 ?>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="<?php echo BASE_URL; ?>/">   
-    <i class="bi bi-claude"></i>  Basic Login</a>
+    <img src="<?php echo ASSET_URL; ?>/img/SimpleFinanceLogo.png" alt="Simple Finance" height="30" class="me-2">Simple Finance</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
