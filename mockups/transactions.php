@@ -28,7 +28,12 @@
       <!-- main-->
       <main role="main" class="flex-grow-1 p-4">
         <h1>Transactions</h1>
-        <p>View your recent transactions.</p>
+        <p>View your recent transactions</p>
+        <div class="btn-group mb-4" role="group" aria-label="Transaction actions">
+          <button type="button" class="btn btn-primary">Add Transaction</button>
+          <button type="button" class="btn btn-secondary">Edit Transaction</button>
+          <button type="button" class="btn btn-danger">Delete Transaction</button>
+        </div>
 
         <div class="table-responsive">
           <table class="table table-striped table-hover">
@@ -41,36 +46,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>2026-10-20</td>
-                <td>Grocery Store</td>
-                <td><span class="badge bg-info">Food</span></td>
-                <td class="text-danger">-$85.40</td>
-              </tr>
-              <tr>
-                <td>2026-10-19</td>
-                <td>Direct Deposit - Payroll</td>
-                <td><span class="badge bg-success">Income</span></td>
-                <td class="text-success">+$1,500.00</td>
-              </tr>
-              <tr>
-                <td>2026-10-18</td>
-                <td>Electric Company</td>
-                <td><span class="badge bg-warning text-dark">Utilities</span></td>
-                <td class="text-danger">-$120.00</td>
-              </tr>
-              <tr>
-                <td>2026-10-17</td>
-                <td>Coffee Shop</td>
-                <td><span class="badge bg-info">Food</span></td>
-                <td class="text-danger">-$5.75</td>
-              </tr>
-              <tr>
-                <td>2026-10-16</td>
-                <td>Online Subscription</td>
-                <td><span class="badge bg-secondary">Entertainment</span></td>
-                <td class="text-danger">-$14.99</td>
-              </tr>
+             
+             
             </tbody>
           </table>
         </div>

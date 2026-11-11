@@ -49,28 +49,7 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-header">
-            <h5 class="mb-0"><i class="bi bi-bell me-2"></i>Notification Preferences</h5>
-          </div>
-          <div class="card-body">
-            <div class="form-check form-switch mb-3">
-              <input class="form-check-input" type="checkbox" id="emailNotif" checked>
-              <label class="form-check-label" for="emailNotif">Email Notifications</label>
-            </div>
-            <div class="form-check form-switch mb-3">
-              <input class="form-check-input" type="checkbox" id="budgetAlerts" checked>
-              <label class="form-check-label" for="budgetAlerts">Budget Alerts</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="monthlyReport">
-              <label class="form-check-label" for="monthlyReport">Monthly Report Summary</label>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-
+        
     <?php include_once TEMPLATE_PATH . "/footer.php"; ?>
   </body>
 </html>

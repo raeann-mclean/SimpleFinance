@@ -37,10 +37,10 @@
                 <h5 class="card-title"><i class="bi bi-bar-chart me-2"></i>Monthly Spending</h5>
                 <p class="card-text">Track your spending trends over time.</p>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex justify-content-between">Food <span class="fw-bold">$320.00</span></li>
-                  <li class="list-group-item d-flex justify-content-between">Utilities <span class="fw-bold">$180.00</span></li>
-                  <li class="list-group-item d-flex justify-content-between">Entertainment <span class="fw-bold">$75.00</span></li>
-                  <li class="list-group-item d-flex justify-content-between">Transport <span class="fw-bold">$150.00</span></li>
+                  <li class="list-group-item d-flex justify-content-between">Food <span class="fw-bold">$0.00</span></li>
+                  <li class="list-group-item d-flex justify-content-between">Utilities <span class="fw-bold">$0.00</span></li>
+                  <li class="list-group-item d-flex justify-content-between">Entertainment <span class="fw-bold">$0.00</span></li>
+                  <li class="list-group-item d-flex justify-content-between">Transport <span class="fw-bold">$0.00</span></li>
                 </ul>
               </div>
             </div>
@@ -51,9 +51,9 @@
                 <h5 class="card-title"><i class="bi bi-pie-chart me-2"></i>Income vs Expenses</h5>
                 <p class="card-text">Overview of your income and expenses this month.</p>
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item d-flex justify-content-between">Total Income <span class="fw-bold text-success">$3,000.00</span></li>
-                  <li class="list-group-item d-flex justify-content-between">Total Expenses <span class="fw-bold text-danger">$725.00</span></li>
-                  <li class="list-group-item d-flex justify-content-between">Net Savings <span class="fw-bold text-primary">$2,275.00</span></li>
+                  <li class="list-group-item d-flex justify-content-between">Total Income <span class="fw-bold text-success">$0.00</span></li>
+                  <li class="list-group-item d-flex justify-content-between">Total Expenses <span class="fw-bold text-danger">$0.00</span></li>
+                  <li class="list-group-item d-flex justify-content-between">Net Savings <span class="fw-bold text-primary">$0.00</span></li>
                 </ul>
               </div>
             </div>

@@ -25,17 +25,22 @@
     <div class="d-flex vh-100 m-0" style="margin-top: 56px;">
       <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
 
-      <!-- mainn -->
+      <!-- mainnnn -->
       <main role="main" class="flex-grow-1 p-4">
         <h1>Accounts</h1>
-        <p>Manage your financial accounts here.</p>
+        <p>Manage your financial accounts here</p>
+        <div class="btn-group mb-4" role="group" aria-label="Transaction actions">
+          <button type="button" class="btn btn-primary">Add Account</button>
+          <button type="button" class="btn btn-danger">Delete Account</button>
+        </div>
+        
 
         <div class="row g-4">
           <div class="col-md-4">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title"><i class="bi bi-bank me-2"></i>Checking Account</h5>
-                <p class="card-text fs-4 fw-bold text-success">$2,450.00</p>
+                <p class="card-text fs-4 fw-bold text-success">$0.00</p>
                 <p class="card-text text-muted">****1234</p>
               </div>
             </div>
@@ -44,8 +49,8 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title"><i class="bi bi-piggy-bank me-2"></i>Savings Account</h5>
-                <p class="card-text fs-4 fw-bold text-success">$10,200.00</p>
-                <p class="card-text text-muted">****5678</p>
+                <p class="card-text fs-4 fw-bold text-success">$0.00</p>
+                <p class="card-text text-muted">****4321</p>
               </div>
             </div>
           </div>
@@ -53,8 +58,8 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title"><i class="bi bi-credit-card me-2"></i>Credit Card</h5>
-                <p class="card-text fs-4 fw-bold text-danger">-$340.00</p>
-                <p class="card-text text-muted">****9012</p>
+                <p class="card-text fs-4 fw-bold text-danger">$0.00</p>
+                <p class="card-text text-muted">****1234</p>
               </div>
             </div>
           </div>

@@ -30,6 +30,17 @@
       <main role="main" class="flex-grow-1 p-4">
         <h1>Simple Finance Dashboard</h1>
         <p>Welcome to Simple Finance</p>
+        <div class="dropdown">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Month
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Current</a></li>
+            <li><a class="dropdown-item" href="#">October</a></li>
+            <li><a class="dropdown-item" href="#">November</a></li>
+            <li><a class="dropdown-item" href="#">December</a></li>
+          </ul>
+        </div>
 
         <!-- Budget Overview -->
         <div class="row g-4 mt-2">
@@ -37,7 +48,7 @@
             <div class="card border-success">
               <div class="card-body text-center">
                 <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-wallet2 me-1"></i>Total Balance</h6>
-                <p class="card-text fs-3 fw-bold text-success">$12,310.00</p>
+                <p class="card-text fs-3 fw-bold text-success">$0.00</p>
               </div>
             </div>
           </div>
@@ -45,7 +56,7 @@
             <div class="card border-danger">
               <div class="card-body text-center">
                 <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-cart me-1"></i>Spent This Month</h6>
-                <p class="card-text fs-3 fw-bold text-danger">$725.00</p>
+                <p class="card-text fs-3 fw-bold text-danger">$0.00</p>
               </div>
             </div>
           </div>
@@ -53,7 +64,7 @@
             <div class="card border-primary">
               <div class="card-body text-center">
                 <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-cash-stack me-1"></i>Left to Spend</h6>
-                <p class="card-text fs-3 fw-bold text-primary">$2,275.00</p>
+                <p class="card-text fs-3 fw-bold text-primary">$0.00</p>
               </div>
             </div>
           </div>
