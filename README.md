@@ -23,15 +23,31 @@ SimpleFinance/
 ├── index.php          Login page (the homepage, must stay at the top level)
 ├── pages/             Other public pages: create account, forgot password, login failed
 ├── dashboards/        Where users land after logging in: admin/, user/, guest/
-├── templates/         Shared head, navbar and footer, plus blank_page.php to copy for new pages
+│                      user/ holds the finance pages: index (dashboard), accounts,
+│                      transactions, reports, settings
+├── templates/         Shared head, navbar, sidebar and footer, plus blank_page.php to copy for new pages
 ├── php/               Code that runs behind the scenes: form handlers, login/session checks,
-│                      database connection (config.php, path.php) and start.php
+│                      database connection (config.php, path.php), finance.php and start.php
 ├── assets/            css/, js/ and img/
-├── mockups/           Plain HTML design mockups (not part of the running app)
+├── mockups/           Original design mockups (the live versions are in dashboards/user/)
 └── src/db/            schema.sql and seeds.sql
 ```
 
 A page and the code that handles its form live in different folders: for example, `pages/create_account.php` shows the form and `php/create_account_submit.php` saves the new account.
+
+### Finance pages (dashboards/user/)
+
+Each page starts with one include that logs the user in, checks they have the `user` role, connects to the database and loads the helpers:
+
+```php
+include_once (realpath(dirname(__FILE__, 3).'/php/user_page.php'));
+```
+
+After that, `$user_id` is the logged-in user and `$db_connection` is the database. Get data with the functions in `php/finance.php` (`get_accounts()`, `get_transactions()`, `period_totals()`, `get_budgets()`, ...). They all take `$user_id` and only return that user's rows, so one user can never see another's data.
+
+- Print anything from the database with `h()` (escapes HTML) and money with `money()`.
+- Forms post to a handler in `php/` (`account_submit.php`, `transaction_submit.php`, `settings_submit.php`). Put `<?php echo csrf_field(); ?>` inside every form, and check ownership (`user_owns_account()` etc.) before changing anything.
+- Add `?month=2026-10` to the dashboard, transactions or reports URL to pick a month.
 
 Use the constants from `php/path.php` for links and includes instead of relative paths like `./` or `../`:
 
