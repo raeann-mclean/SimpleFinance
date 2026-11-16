@@ -8,7 +8,13 @@
   include_once (ROOT_PATH . '/php/config.php');
 
   session_start();
-  
+
+  // Not logged in, send to the login page
+  if (!isset($_SESSION['login_user'])) {
+    header("location: " . BASE_URL . "/index.php");
+    exit();
+  }
+
   $user_check = $_SESSION['login_user'];
   // Check user and get roll session from database
 

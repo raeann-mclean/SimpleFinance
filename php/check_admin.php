@@ -9,16 +9,13 @@
  * @version   1.0
  */
 
-// Check if user role is 1 (admin user)
+// Check if user role is 1 (admin user).
+// Include after php/session.php, which sets $user_role.
 
-if($user_role == 1){
-  // Everything is working
-  echo '<script>console.log("Everything is Working");</script>';
-} else {
+if ($user_role != 1) {
   // Access Denied
   $_SESSION['message'] = "Access Denied";
-  // Redirect to logout
+  // Redirect to logout, and stop here so the protected page is never sent
   header("location: " . SRC_PATH . "/logout.php");
+  exit();
 }
-
-?>

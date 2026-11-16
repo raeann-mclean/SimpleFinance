@@ -1,131 +1,146 @@
 <?php
 /**
- * User Index Page
+ * User Dashboard (finance overview)
  *
  * @author    Joshua Connor <connorj4@southernct.edu>
- * @copyright 2026 
- * @date      2026-02-24
- * @version   1.0
- * new update: 2026-06-01
+ * @author    James Montgomery (design, from mockups/dashboard.php)
+ * @copyright 2026
+ * @version   2.0
  */
-error_reporting(E_ALL); // Report all errors
-ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
 
-  /* Quick Paths */
-  /* note the 2 after __FILE__, because it's 3 directories deep */
-  include_once (realpath(dirname(__FILE__, 3).'/php/session.php')); // Session will be included in header.php
-  include_once (realpath(dirname(__FILE__, 3).'/php/path.php')); // Path will be included in header.php
-  // Session will be included in header.php
+  /* Login, role check, database and finance helpers */
+  include_once (realpath(dirname(__FILE__, 3).'/php/user_page.php'));
 
   /* Page Name */
   $page_name = "user";
+  $active_page = 'dashboard'; // highlights the sidebar link
 
-?>
-<?php
-//======================================================================
-// USER DASHBOARD PAGE
-//======================================================================
+  /* Which month to show (?month=YYYY-MM, defaults to the newest month with data) */
+  $months = available_months($db_connection, $user_id);
+  $selected_month = selected_month($db_connection, $user_id);
+  [$month_start, $month_end] = month_range($selected_month);
 
-error_reporting(E_ALL);
-ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
+  /* Data for this user */
+  $accounts      = get_accounts($db_connection, $user_id);
+  $totals        = period_totals($db_connection, $user_id, $month_start, $month_end);
+  $budgets       = get_budgets($db_connection, $user_id, $month_start, $month_end);
+  $recent        = get_transactions($db_connection, $user_id, $month_start, $month_end, 5);
 
-  /* Quick Paths */
-  /* note the 2 after __FILE__, because it's 3 directories deep */
-  include_once (realpath(dirname(__FILE__, 3).'/php/session.php')); // Session will be included in header.php
-  include_once (realpath(dirname(__FILE__, 3).'/php/path.php')); // Path will be included in header.php
-  // Session will be included in header.php
-  
-  /* Check Role */
-  include_once (ROOT_SRC_PATH .'/check_user.php'); // Check user role and redirect if not authorized
+  $total_balance = array_sum(array_column($accounts, 'balance'));
 
-  $user_check = $_SESSION['login_user'];
-  // Check user and get roll session from database
-
-  /* Page Name */
-  $page_name = "admin"; // Set page name for active link in header
-
+  /* Left to spend: what's left in this month's budgets, or income minus spending if there are no budgets */
+  if (count($budgets) > 0) {
+    $left_label    = "Left in Budgets";
+    $left_to_spend = array_sum(array_column($budgets, 'amount_limit')) - array_sum(array_column($budgets, 'spent'));
+  } else {
+    $left_label    = "Left to Spend";
+    $left_to_spend = $totals['income'] - $totals['expense'];
+  }
 ?>
 <!doctype html>
 <html lang="en">
   <head>
-  <?php include_once (TEMPLATE_PATH . '/head.php'); // Include head.php ?>
+    <?php include_once TEMPLATE_PATH . "/head.php"; ?>
   </head>
   <body class="<?php echo $page_name; ?>">
+    <?php include_once TEMPLATE_PATH . "/header.php"; ?>
 
-  <?php include_once (TEMPLATE_PATH . '/header.php'); // Include header.php ?>
-
-    <?php $active_page = 'dashboard'; ?>
-    <div class="d-flex vh-100 m-0">
+    <div class="d-flex min-vh-100 m-0">
       <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
 
-      <main role="main" class="flex-grow-1 p-4">
-        <div class="container text-center">
-          <div class="row align-items-center">
-            <div class="col">
-              <div class="mb-6">
-                <h1>Welcome <?php echo $_SESSION['user_first'] ?></h1>
-                <p class="lead">This is the <?php echo $_SESSION['user_type'] ?> dashboard.</p>
-                <p>Only users with the role can access this page.</p>
+      <main role="main" class="flex-grow-1 p-4 pb-5">
+        <h1>Simple Finance Dashboard</h1>
+        <p>Welcome back, <?php echo h($_SESSION['user_first']); ?></p>
+        <?php include ROOT_SRC_PATH . '/error_rprt.php'; ?>
+        <?php include TEMPLATE_PATH . '/month_picker.php'; ?>
+
+        <!-- Budget Overview -->
+        <div class="row g-4 mt-2">
+          <div class="col-md-4">
+            <div class="card border-success">
+              <div class="card-body text-center">
+                <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-wallet2 me-1"></i>Total Balance</h6>
+                <p class="card-text fs-3 fw-bold <?php echo $total_balance < 0 ? 'text-danger' : 'text-success'; ?>"><?php echo money($total_balance); ?></p>
+                <small class="text-muted">across <?php echo count($accounts); ?> account<?php echo count($accounts) == 1 ? '' : 's'; ?>, today</small>
               </div>
-              <hr class="mb-4">
-              <section class="mb-4">
-                <h2>User Information</h2>
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">First</th>
-                      <th scope="col">Last</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Username</th>
-                      <th scope="col">Role</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                      include_once (ROOT_PATH . '/php/config.php');
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-danger">
+              <div class="card-body text-center">
+                <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-cart me-1"></i>Spent in <?php echo h(month_label($selected_month)); ?></h6>
+                <p class="card-text fs-3 fw-bold text-danger"><?php echo money($totals['expense']); ?></p>
+                <small class="text-muted">income <?php echo money($totals['income']); ?></small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-primary">
+              <div class="card-body text-center">
+                <h6 class="card-subtitle mb-2 text-muted"><i class="bi bi-cash-stack me-1"></i><?php echo $left_label; ?></h6>
+                <p class="card-text fs-3 fw-bold <?php echo $left_to_spend < 0 ? 'text-danger' : 'text-primary'; ?>"><?php echo money($left_to_spend); ?></p>
+                <small class="text-muted"><?php echo h(month_label($selected_month)); ?></small>
+              </div>
+            </div>
+          </div>
+        </div>
 
-                      $result = $db_connection->query(
-                        "SELECT
-                            u.user_id,
-                            c.first_name,
-                            c.last_name,
-                            c.email,
-                            cr.username,
-                            r.role_type
-                        FROM Users u
-                        INNER JOIN Contacts c ON u.contact_id = c.contact_id
-                        INNER JOIN Credentials cr ON u.user_id = cr.user_id
-                        INNER JOIN Roles r ON u.role_id = r.role_id
-                        WHERE cr.username = '$user_check'
-                        ");
+        <div class="row g-4 mt-1">
+          <!-- Budgets -->
+          <div class="col-lg-5">
+            <div class="card h-100">
+              <div class="card-header"><i class="bi bi-bullseye me-1"></i>Budgets</div>
+              <div class="card-body">
+                <?php if (count($budgets) == 0): ?>
+                  <p class="text-muted mb-0">No budgets set for <?php echo h(month_label($selected_month)); ?>.</p>
+                <?php endif; ?>
+                <?php foreach ($budgets as $b):
+                  $percent = $b['amount_limit'] > 0 ? min(100, round($b['spent'] / $b['amount_limit'] * 100)) : 0;
+                  $bar = $b['spent'] > $b['amount_limit'] ? 'bg-danger' : ($percent >= 80 ? 'bg-warning' : 'bg-success');
+                ?>
+                  <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                      <span><?php echo h($b['category_name']); ?></span>
+                      <span><?php echo money($b['spent']); ?> / <?php echo money($b['amount_limit']); ?></span>
+                    </div>
+                    <div class="progress" role="progressbar" aria-label="<?php echo h($b['category_name']); ?> budget" aria-valuenow="<?php echo $percent; ?>" aria-valuemin="0" aria-valuemax="100">
+                      <div class="progress-bar <?php echo $bar; ?>" style="width: <?php echo $percent; ?>%"></div>
+                    </div>
+                  </div>
+                <?php endforeach; ?>
+              </div>
+            </div>
+          </div>
 
-                      if ($result->num_rows > 0) {
-                        while($row = $result->fetch_assoc()) {
-                          echo "<tr>";
-                          echo "<th scope='row'>" . $row["user_id"] . "</th>";
-                          echo "<td>" . htmlspecialchars($row["first_name"]) . "</td>";
-                          echo "<td>" . htmlspecialchars($row["last_name"]) . "</td>";
-                          echo "<td>" . htmlspecialchars($row["email"]) . "</td>";
-                          echo "<td>" . htmlspecialchars($row["username"]) . "</td>";
-                          echo "<td>" . htmlspecialchars($row["role_type"]) . "</td>";
-                          echo "</tr>";
-                        }
-                      } else {
-                        echo "<tr><td colspan='6'>No users found</td></tr>";
-                      }
-                      $db_connection->close();
-                    ?>
-                  </tbody>
-                </table>
-              </section>
+          <!-- Recent transactions -->
+          <div class="col-lg-7">
+            <div class="card h-100">
+              <div class="card-header d-flex justify-content-between">
+                <span><i class="bi bi-clock-history me-1"></i>Recent Transactions</span>
+                <a href="<?php echo USER_URL; ?>/transactions.php?month=<?php echo h($selected_month); ?>">View all</a>
+              </div>
+              <ul class="list-group list-group-flush">
+                <?php if (count($recent) == 0): ?>
+                  <li class="list-group-item text-muted">No transactions in <?php echo h(month_label($selected_month)); ?>.</li>
+                <?php endif; ?>
+                <?php foreach ($recent as $t): ?>
+                  <li class="list-group-item d-flex justify-content-between">
+                    <span>
+                      <?php echo h($t['description'] ?: $t['category_name']); ?>
+                      <br><small class="text-muted"><?php echo h(date('M j', strtotime($t['transaction_date']))); ?> · <?php echo h($t['category_name']); ?> · <?php echo h($t['account_name']); ?></small>
+                    </span>
+                    <span class="fw-bold <?php echo $t['category_type'] == 'income' ? 'text-success' : 'text-danger'; ?>">
+                      <?php echo ($t['category_type'] == 'income' ? '+' : '-') . money($t['amount']); ?>
+                    </span>
+                  </li>
+                <?php endforeach; ?>
+              </ul>
             </div>
           </div>
         </div>
       </main>
     </div>
 
-    <?php include_once (TEMPLATE_PATH . '/footer.php'); ?>
+    <?php include_once TEMPLATE_PATH . "/footer.php"; ?>
   </body>
 </html>
-
