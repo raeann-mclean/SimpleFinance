@@ -66,7 +66,7 @@ include_once (TEMPLATE_PATH . '/head.php');
         <?php
             /* User Information */
             if (isset($_SESSION['user_first']) && isset($_SESSION['user_type'])) {
-                echo 'Welcome ' . $_SESSION['user_first'] . ' (' . $_SESSION['user_type'] . ')';
+                echo 'Welcome ' . htmlspecialchars($_SESSION['user_first']) . ' (' . htmlspecialchars($_SESSION['user_type']) . ')';
                 echo ' | <a href="' . SRC_PATH . '/logout.php">Logout</a>';
             } else {
                 echo 'Not Logged In';
