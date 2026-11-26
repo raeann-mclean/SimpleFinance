@@ -58,13 +58,13 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
     <div class="d-flex vh-100 m-0">
       <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
 
-      <main role="main" class="flex-grow-1 p-4">
+      <main id="main-content" tabindex="-1" role="main" class="flex-grow-1 p-4">
         <div class="container text-center">
           <div class="row align-items-center">
             <div class="col">
               <div class="mb-6">
-                <h1>Welcome <?php echo $_SESSION['user_first'] ?></h1>
-                <p class="lead">This is the <?php echo $_SESSION['user_type'] ?> dashboard.</p>
+                <h1>Welcome <?php echo htmlspecialchars($_SESSION['user_first'], ENT_QUOTES, 'UTF-8') ?></h1>
+                <p class="lead">This is the <?php echo htmlspecialchars($_SESSION['user_type'], ENT_QUOTES, 'UTF-8') ?> dashboard.</p>
                 <p>Only users with the role can access this page.</p>
               </div>
               <hr class="mb-4">
@@ -85,7 +85,7 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
                     <?php
                       include_once (ROOT_PATH . '/php/config.php');
 
-                      $result = $db_connection->query(
+                      $user_statement = $db_connection->prepare(
                         "SELECT
                             u.user_id,
                             c.first_name,
@@ -97,8 +97,11 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
                         INNER JOIN Contacts c ON u.contact_id = c.contact_id
                         INNER JOIN Credentials cr ON u.user_id = cr.user_id
                         INNER JOIN Roles r ON u.role_id = r.role_id
-                        WHERE cr.username = '$user_check'
+                        WHERE u.user_id = ?
                         ");
+                      $user_statement->bind_param('i', $_SESSION['user_id']);
+                      $user_statement->execute();
+                      $result = $user_statement->get_result();
 
                       if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -114,6 +117,7 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
                       } else {
                         echo "<tr><td colspan='6'>No users found</td></tr>";
                       }
+                      $user_statement->close();
                       $db_connection->close();
                     ?>
                   </tbody>

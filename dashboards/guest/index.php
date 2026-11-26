@@ -27,13 +27,13 @@
 
   <?php include_once (TEMPLATE_PATH . '/header.php'); ?>
   <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
-    <main role="main" class="container">
+    <main id="main-content" tabindex="-1" role="main" class="container">
 
     <div class="container text-center">
   <div class="row align-items-center">
     
     <div class="col">
-      <h1>Welcome Guest <?php echo $user_name; ?></h1>
+      <h1>Welcome Guest <?php echo htmlspecialchars($_SESSION['user_first'], ENT_QUOTES, 'UTF-8'); ?></h1>
     </div>
     
   </div>

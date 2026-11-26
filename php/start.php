@@ -12,20 +12,22 @@ error_reporting(-1);
 ini_set('display_errors', 'On');
 
 /* the first connection to the database */
-DEFINE('DB_HOST', "localhost");
-DEFINE('DB_USER', "root");
-DEFINE('DB_PASSWORD', ""); //Note: this should be your root password
+require_once __DIR__ . '/db_settings.php';
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+if (!preg_match('/^[A-Za-z0-9_]+$/D', DB_NAME)) {
+  throw new RuntimeException('Database name must contain only letters, numbers, and underscores.');
+}
 
 // Establish the initial database connection
 try {
-  $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD)
+  $db_connection = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, '', DB_PORT)
     OR die("Connection failed: " . $db_connection->connect_error);
 } catch (Exception $e) {
   echo 'Caught exception: ',  $e->getMessage(), nl2br("\r\n");
 }
 
 /* Check if database is there or will create it */
-$create_stmt = "CREATE DATABASE IF NOT EXISTS login_db";
+$create_stmt = "CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "`";
 
 /* Check if database drop was sucessful */
 if(mysqli_query($db_connection, $create_stmt)) {
@@ -38,7 +40,8 @@ $prep_stmt->execute();
 $prep_stmt->close();
 
 /* Change to the created database */
-$db_connection->select_db("login_db");
+$db_connection->select_db(DB_NAME);
+$db_connection->set_charset("utf8mb4");
 
 /* Drop all tables for clean install */
 $db_connection->query('SET foreign_key_checks = 0');
@@ -69,7 +72,7 @@ $create_roles = $db_connection->prepare(
 	"CREATE OR REPLACE TABLE Roles(
         role_id int NOT NULL AUTO_INCREMENT,
         role_type varchar(255) NOT NULL,
-        PRIMARY KEY(role_id));");
+        PRIMARY KEY(role_id)) ENGINE=InnoDB;");
 $create_roles->execute();
 $create_roles->close();
 
@@ -87,7 +90,7 @@ $create_contacts = $db_connection->prepare(
         state_code varchar(255),
         post_code int(5),
         updated timestamp,
-        PRIMARY KEY(contact_id));");
+        PRIMARY KEY(contact_id)) ENGINE=InnoDB;");
 $create_contacts->execute();
 $create_contacts->close();
 
@@ -103,7 +106,7 @@ $create_users = $db_connection->prepare(
 	    creation_date timestamp,
 	    PRIMARY KEY(user_id),
         FOREIGN KEY(role_id) REFERENCES Roles(role_id),
-        FOREIGN KEY(contact_id) REFERENCES Contacts(contact_id));");
+        FOREIGN KEY(contact_id) REFERENCES Contacts(contact_id)) ENGINE=InnoDB;");
 $create_users->execute();
 $create_users->close();
 
@@ -114,7 +117,7 @@ $create_credentials = $db_connection->prepare(
 	    user_id int NOT NULL,
         password_salted varchar(255) NOT NULL,
 	    PRIMARY KEY(username),
-        FOREIGN KEY(user_id) REFERENCES Users(user_id));");
+        FOREIGN KEY(user_id) REFERENCES Users(user_id)) ENGINE=InnoDB;");
 $create_credentials->execute();
 $create_credentials->close();
 
@@ -250,7 +253,9 @@ $insert_credentials->close();
 /* Status Display */
 echo nl2br("The database tables were successfully populated.\r\n");
 /* Return to homepage after 5 seconds */
-header( "refresh:10;url=/SimpleFinance" );
+if (PHP_SAPI !== 'cli' && !headers_sent()) {
+  header( "refresh:10;url=/SimpleFinance" );
+}
 
 /* ALWAYS CLOSE THE DB CONNECTION */
 $db_connection->close();

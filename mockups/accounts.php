@@ -26,7 +26,7 @@
       <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
 
       <!-- mainnnn -->
-      <main role="main" class="flex-grow-1 p-4">
+      <main id="main-content" tabindex="-1" role="main" class="flex-grow-1 p-4">
         <h1>Accounts</h1>
         <p>Manage your financial accounts here</p>
         <div class="btn-group mb-4" role="group" aria-label="Transaction actions">
