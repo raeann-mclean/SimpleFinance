@@ -32,16 +32,16 @@ ini_set('display_errors', 0); // set to 1 to display errors, 0 to hide them
   <body class="<?php echo $page_name; ?>">
 
   <?php include_once (TEMPLATE_PATH . '/header.php'); ?>
-    <main role="main" class="container">
+    <main id="main-content" tabindex="-1" role="main" class="container">
 
     <div class="container text-center">
   <div class="row align-items-center">
     
     <div class="col">
       <div class="mb-6">
-      <h1>Welcome <?php echo $_SESSION['user_first'] ?></h1>
-      <p class="lead">This is the <?php echo $_SESSION['user_type'] ?> dashboard.</p>
-      <p>Only users with the <?php echo $_SESSION['user_type'] ?> role can access this page.</p>
+      <h1>Welcome <?php echo htmlspecialchars($_SESSION['user_first'], ENT_QUOTES, 'UTF-8') ?></h1>
+      <p class="lead">This is the <?php echo htmlspecialchars($_SESSION['user_type'], ENT_QUOTES, 'UTF-8') ?> dashboard.</p>
+      <p>Only users with the <?php echo htmlspecialchars($_SESSION['user_type'], ENT_QUOTES, 'UTF-8') ?> role can access this page.</p>
       </div>
       <hr class="mb-4">
       <section class="mb-4">

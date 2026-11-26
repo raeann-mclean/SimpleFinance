@@ -26,7 +26,7 @@
       <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
 
       <!-- main -->
-      <main role="main" class="flex-grow-1 p-4">
+      <main id="main-content" tabindex="-1" role="main" class="flex-grow-1 p-4">
         <h1>Reports</h1>
         <p>View your financial reports and analytics.</p>
 

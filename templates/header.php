@@ -15,10 +15,7 @@ if (!isset($_SESSION)) {
     include_once (ROOT_PATH . '/php/session.php');
 }
 ?>
-<?php
-// Header Section
-include_once (TEMPLATE_PATH . '/head.php');
-?>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <header>
 <?php
 // navigation bar
@@ -62,11 +59,15 @@ include_once (TEMPLATE_PATH . '/head.php');
           }
         ?>
       </ul>
+      <div class="d-flex flex-wrap gap-2 align-items-center me-3 my-2 my-lg-0" aria-label="Display preferences" role="group">
+        <button id="theme-toggle" type="button" class="btn btn-outline-light btn-sm" aria-pressed="false">Switch to dark mode</button>
+        <button id="text-size-toggle" type="button" class="btn btn-outline-light btn-sm" aria-pressed="false">Use larger text</button>
+      </div>
       <span class="navbar-text">
         <?php
             /* User Information */
             if (isset($_SESSION['user_first']) && isset($_SESSION['user_type'])) {
-                echo 'Welcome ' . $_SESSION['user_first'] . ' (' . $_SESSION['user_type'] . ')';
+                echo 'Welcome ' . htmlspecialchars($_SESSION['user_first'], ENT_QUOTES, 'UTF-8') . ' (' . htmlspecialchars($_SESSION['user_type'], ENT_QUOTES, 'UTF-8') . ')' ;
                 echo ' | <a href="' . SRC_PATH . '/logout.php">Logout</a>';
             } else {
                 echo 'Not Logged In';

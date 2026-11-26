@@ -26,7 +26,7 @@
       <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
 
       <!-- main -->
-      <main role="main" class="flex-grow-1 p-4">
+      <main id="main-content" tabindex="-1" role="main" class="flex-grow-1 p-4">
         <h1>Settings</h1>
         <p>Manage your account settings and preferences.</p>
 
@@ -50,6 +50,8 @@
         </div>
 
         
+      </main>
+    </div>
     <?php include_once TEMPLATE_PATH . "/footer.php"; ?>
   </body>
 </html>

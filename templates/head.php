@@ -24,7 +24,8 @@
 <meta name="author" content="CSC 540 Team Project">
 <link rel="icon" href="./favicon.ico">
 
-<title>Basic Login Application</title>
+<title>Simple Finance</title>
+<script src="<?php echo ASSET_URL; ?>/js/main.js"></script>
 
 <?php /* Google Fonts - Roboto flex */ ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">

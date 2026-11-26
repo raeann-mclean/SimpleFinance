@@ -7,7 +7,11 @@
   include_once (realpath(dirname(__FILE__).'/path.php'));
   include_once (ROOT_PATH . '/php/config.php');
 
-  session_start();
+  if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+  if (!isset($_SESSION['login_user']) || !is_string($_SESSION['login_user'])) {
+    header('Location: ' . BASE_URL . '/');
+    exit();
+  }
   
   $user_check = $_SESSION['login_user'];
   // Check user and get roll session from database

@@ -27,7 +27,7 @@
       <?php include_once TEMPLATE_PATH . "/sidebar.php"; ?>
 
       <!-- main -->
-      <main role="main" class="flex-grow-1 p-4">
+      <main id="main-content" tabindex="-1" role="main" class="flex-grow-1 p-4">
         <h1>Simple Finance Dashboard</h1>
         <p>Welcome to Simple Finance</p>
         <div class="dropdown">

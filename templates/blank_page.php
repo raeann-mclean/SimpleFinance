@@ -25,7 +25,7 @@
   </head>
   <body>
     <?php include_once TEMPLATE_PATH . "/header.php"; ?>
-    <main role="main" class="container">
+    <main id="main-content" tabindex="-1" role="main" class="container">
       <!-- Primary Content Goes Here -->
     </main>
     <!-- One footer file for all pages -->
